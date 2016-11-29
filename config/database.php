@@ -54,6 +54,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            //'host' => env('DB_HOST', 'localhost'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -68,11 +69,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', 'localhost'),
+            // 'host' => env('DB_HOST', 'localhost'),
+            // 'port' => env('DB_PORT', '5432'),
+            'host' => env('DB_HOST', 'ec2-54-225-79-158.compute-1.amazonaws.com'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'survey'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
+            // 'database' => env('DB_DATABASE', 'survey'),
+            // 'username' => env('DB_USERNAME', 'root'),
+            // 'password' => env('DB_PASSWORD', 'root'),
+            'database' => env('DB_DATABASE', 'd7c9athvu3abi0'),
+            'username' => env('DB_USERNAME', 'rnooobzqebmttz'),
+            'password' => env('DB_PASSWORD', 'UPjC-9HvmtM5IFL_4bKicZccBE'),
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
