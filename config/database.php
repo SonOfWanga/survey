@@ -69,16 +69,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'survey'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
-            // 'host' => env('DB_HOST', 'ec2-54-225-79-158.compute-1.amazonaws.com'),
+            // 'host' => env('DB_HOST', 'localhost'),
             // 'port' => env('DB_PORT', '5432'),
-            // 'database' => env('DB_DATABASE', 'd7c9athvu3abi0'),
-            // 'username' => env('DB_USERNAME', 'rnooobzqebmttz'),
-            // 'password' => env('DB_PASSWORD', 'UPjC-9HvmtM5IFL_4bKicZccBE'),
+            // 'database' => env('DB_DATABASE', 'survey'),
+            // 'username' => env('DB_USERNAME', 'root'),
+            // 'password' => env('DB_PASSWORD', 'root'),
+            'host' => env('DB_HOST', 'ec2-54-225-79-158.compute-1.amazonaws.com'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'd7c9athvu3abi0'),
+            'username' => env('DB_USERNAME', 'rnooobzqebmttz'),
+            'password' => env('DB_PASSWORD', 'UPjC-9HvmtM5IFL_4bKicZccBE'),
             
             
             'charset' => 'utf8',
