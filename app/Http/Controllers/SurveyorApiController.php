@@ -18,8 +18,8 @@ class SurveyorApiController extends Controller
     
     public function login()
     {
-        $var = "testing:"."{'test': 1, 'test': 2 }";
-        return $var;
+        $var = Surveyor::where('email', 'peter@g.com')->first();
+        return json_encode($var, JSON_FORCE_OBJECT);
     }
 
     public function form(){
@@ -37,7 +37,6 @@ class SurveyorApiController extends Controller
         };
         
         return json_encode($question_obj, JSON_FORCE_OBJECT);
-        //return $question_obj;
 
     }
 

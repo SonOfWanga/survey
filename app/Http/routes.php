@@ -15,6 +15,7 @@ Route::resource('category', 'CategoryController');
 
 Route::resource('surveyor', 'SurveyorController');
 
+Route::post('questionnaire/update/{questionnaire}', 'QuestionnaireController@update');
 Route::resource('questionnaire', 'QuestionnaireController');
 
 Route::auth();

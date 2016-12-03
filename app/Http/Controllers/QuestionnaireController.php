@@ -37,11 +37,12 @@ class QuestionnaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function types(){
-        $types  = array('1' => 'Free text', 
+        $types  = array('1' => 'Free text',
                         '2' => 'Yes\No',
-                        '3' => 'Select',
+                        '3' => 'Check box',
                         '4' => 'Option',
-                        '5' => 'Number');
+                        '5' => 'List',
+                        '6' => 'Number');
         return $types;
     }
 
@@ -63,12 +64,7 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         //
-        $rules = array(
-            'type' => 'required',
-            'category_id'=> 'required',
-            'question' => 'required'
 
-        );
 
         // $table->increments('id');
         //     $table->integer('question_id');
@@ -77,14 +73,31 @@ class QuestionnaireController extends Controller
         //     # code...
         //     echo $key."  ".$value;
         // };
+        if ($request->details){
+            $rules = array(
+                'type' => 'required',
+                'category_id'=> 'required',
+                'question' => 'required',
+                'weight'=>'required'
+                );
+            $validator = Validator::make($request->all(), $rules);
 
-        $validator = Validator::make($request->all(), $rules);
+        }else {
+            $rules = array(
+                'type' => 'required',
+                'category_id'=> 'required',
+                'question_1' => 'required',
+                'weight_1'=>'required'
+            );
+            $validator = Validator::make($request->all(), $rules);
+        }
 
         if ($validator->fails()) {
             return redirect('questionnaire/create?category_id='.$request->category_id)
                 ->withErrors($validator)
                 ->withInput($request->except('password'));
-        } else {
+        }
+        else {
             // store
             $qsn = new Questionnaire;
             $qsn->question_type = $request->type;
@@ -99,10 +112,10 @@ class QuestionnaireController extends Controller
             $qsn->organization_id = session()->get('user.account.organization_id');
             $qsn->user_id =  Auth::user()->id;
             $qsn->save();
-            
+
             if($qsn->id){
                 if($request->details){
-                    
+
 
                     foreach ($request->details as $key => $value) {
                         $qsn_details = new QuestionDetails;
@@ -111,7 +124,7 @@ class QuestionnaireController extends Controller
                         $qsn_details->save();
                     };
                 }
-                
+
                 return redirect('category/'.$request->category_id);
             }
         }
@@ -136,7 +149,12 @@ class QuestionnaireController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Questionnaire::where('id', $id)->first();
+        $options = QuestionDetails::where('question_id', $id)->get();
+        return view('questionnaire.edit')
+                    ->with('question', $question)
+                    ->with('types', $this->types())
+                    ->with('options', $options);
     }
 
     /**
@@ -148,7 +166,30 @@ class QuestionnaireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    Questionnaire::where('id', $id)
+                 ->update(['question' => $request->question], ['weight' => $request->weight]);
+
+    foreach($request->option as $key => $value){
+      QuestionDetails::where('id', $key)
+                    ->where('question_id', $id)
+                    ->update(['option' => $value]);
+    }
+
+    if($request->details){
+          foreach ($request->details as $key => $value) {
+              $qsn_details = new QuestionDetails;
+              $qsn_details->question_id = $id;
+              $qsn_details->option = $value;
+              $qsn_details->save();
+          };
+    }
+    return $this->edit($id);
+    // $question = Questionnaire::where('id', $id)->first();
+    // $options = QuestionDetails::where('question_id', $id)->get();
+    // return view('questionnaire.edit')
+    //             ->with('question', $question)
+    //             ->with('types', $this->types())
+    //             ->with('options', $options);
     }
 
     /**

@@ -38,7 +38,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea id="message" required="required" class="form-control" name="description" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
-                data-parsley-validation-threshold="10" >{{ $category[0]->title }}</textarea>
+                data-parsley-validation-threshold="10" >{{ $category[0]->description }}</textarea>
             </div>
           </div>
           <div class="ln_solid"></div>

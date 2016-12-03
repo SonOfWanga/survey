@@ -42,6 +42,8 @@
                           <th>#</th>
                           <th>Question</th>
                           <th>Weight</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -54,6 +56,8 @@
                             <th scope="row">{{ $id }}</th>
                             <td>{{ $qsn->question }}</td>
                             <td>{{ $qsn->weight }}</td>
+                            <td><a href="{{ url('questionnaire/'.$qsn->id.'/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
                           </tr>
                           @php 
                             $id +=1;
@@ -112,7 +116,7 @@
                             <th scope="row">{{ $id }}</th>
                             <td>{{ $surveyor->fname }}</td>
                             <td>{{ $surveyor->lname }}</td>
-                            <td><a href="{{ url('/categorysurveyors/'.$surveyor->id.'/delete/'.$category_id) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                            <td><a href="{{ url('/categorysurveyors/'.$surveyor->id.'/delete/'.$category_id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </td>
                           </tr>
                           @php 

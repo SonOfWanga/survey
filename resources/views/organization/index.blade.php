@@ -12,8 +12,6 @@
       <a class="btn btn-success" href="{{ url('organization/'.$organization_id.'/edit')}}">Edit</a>  
     </div>
   @foreach($organization as $key => $organization )
-    <h3>{{ $organization->id }}</h3>
-    <h3>{{ $organization_id }}</h3>
     <h3>{{ $organization->org_name }}</h3>
     <h3>{{ $organization->address }}</h3>
     <h3>{{ $organization->phone_number }}</h3>

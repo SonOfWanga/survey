@@ -45,7 +45,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">Weight <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="weight" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="weight_1" placeholder="Weight" type="number" value="{{ old('weight') }}">
+                          <input id="weight" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="weight_1" placeholder="Weight" type="number" value="{{ old('weight_1') }}">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -53,7 +53,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="question" class="form-control col-md-7 col-xs-12" name="question_1" placeholder="Question" 
-                          type="text" value="{{ old('question') }}">
+                          type="text" value="{{ old('question_1') }}">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
@@ -110,7 +110,7 @@
     $("#select_details").hide();
 
     $( "#type").change(function() {
-        if($("#type option:selected").val() =="3" || $("#type option:selected").val() =="4"){
+        if($("#type option:selected").val() =="3" || $("#type option:selected").val() =="4" || $("#type option:selected").val() =="5"){
           $("#details").hide();
           $("#select_details").show();
         }else if($("#type option:selected").val() =="0"){
@@ -129,7 +129,7 @@
         '<label class="control-label col-md-3 col-sm-3 col-xs-12" for="details">'+
         'Option '+ (i+1) +'<span class="required">*</span></label>'+
         '<div class="col-md-6 col-sm-6 col-xs-12">'+
-        '<input id="details['+i+']" class="form-control col-md-7 col-xs-12" name="details['+i+']" placeholder="Question" type="text" value="{{ old('details') }}"><br />'+
+        '<input id="details['+i+']" class="form-control col-md-7 col-xs-12" name="details['+i+']" placeholder="Question" type="text" ><br />'+
         '</div>'+
         '</div'
 
