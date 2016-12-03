@@ -74,11 +74,11 @@ return [
             // 'database' => env('DB_DATABASE', 'survey'),
             // 'username' => env('DB_USERNAME', 'root'),
             // 'password' => env('DB_PASSWORD', 'root'),
-            'host' => env('DB_HOST', 'ec2-54-225-79-158.compute-1.amazonaws.com'),
+            'host' => env('DB_HOST', 'ec2-54-235-80-86.compute-1.amazonaws.com'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'd7c9athvu3abi0'),
-            'username' => env('DB_USERNAME', 'rnooobzqebmttz'),
-            'password' => env('DB_PASSWORD', 'UPjC-9HvmtM5IFL_4bKicZccBE'),
+            'database' => env('DB_DATABASE', 'd9musuab2n0f16'),
+            'username' => env('DB_USERNAME', 'kzkqiibstcwzam'),
+            'password' => env('DB_PASSWORD', 'Czrbsh9vtP3cyj3AL03oVDzhOp'),
             
             
             'charset' => 'utf8',
