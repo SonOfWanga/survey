@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', ' https://ulizaujibiwe.herokuapp.com/'),
+    'url' => env('APP_URL', ' https://mbona.herokuapp.com/'),
 
     /*
     |--------------------------------------------------------------------------
