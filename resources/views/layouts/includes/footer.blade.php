@@ -1,7 +1,7 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <a href="{{ url('') }}">Survey - by BLUEBRICK LTD</a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/fastclick.js"></script>  
+    <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/fastclick.js"></script>
     <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/daterangepicker.js"></script>
     <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/nprogress.js"></script>
     <script type="text/javascript" src="{{ url('/')}}/assets/javascripts/jquery.smartWizard.js"></script>

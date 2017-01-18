@@ -48,13 +48,13 @@ class CategorySurveyorsController extends Controller
             $error = "Kindly select a surveyor!";
             return redirect('category/'.$request->category_id)
                 ->withErrors($error);
-        } 
+        }
         else {
             foreach ($request->surveyor_ids as $key => $ids) {
                 $surveyor = new CategorySurveyors;
                 $surveyor->surveyor_id = $key;
                 $surveyor->user_id = Auth::user()->id;
-                $surveyor->organization_id = session()->get('user.account.organization_id');
+                $surveyor->organization_id = session()->get('user.account.id');
                 $surveyor->category_id = $request->category_id;
                 $surveyor->save();
             }
@@ -110,12 +110,12 @@ class CategorySurveyorsController extends Controller
         $surveyor = CategorySurveyors::where('surveyor_id',$id);
         $surveyor->delete();
 
-        
+
         return redirect('category/'.$cat_id);
         // foreach ($request->surveyor_ids as $key => $ids) {
-        //     $surveyor = 
+        //     $surveyor =
         //     $surveyor->surveyor_id = $key;
-            
+
         //     if($surveyor->delete()){
         //         redirect('/category/'.$request->category_id);
         //     }

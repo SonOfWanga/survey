@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <a href="{{ url('category/'.$category_id)}}"><i class="fa fa-arrow-left fa-2x"></i></a>
+  </div>
+</div>
+<div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -25,7 +30,7 @@
                   </div>
                   <div class="x_content">
                     <form class="form-horizontal form-label-left" method="POST" action="/questionnaire">
-                      <input name="_token" hidden value="{!! csrf_token() !!}" /> 
+                      <input name="_token" hidden value="{!! csrf_token() !!}" />
                       <input hidden name="category_id" value="{{ $category_id }}">
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">Select Question type <span class="required">*</span>
@@ -52,7 +57,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question">Question <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="question" class="form-control col-md-7 col-xs-12" name="question_1" placeholder="Question" 
+                          <input id="question" class="form-control col-md-7 col-xs-12" name="question_1" placeholder="Question"
                           type="text" value="{{ old('question_1') }}">
                         </div>
                       </div>
@@ -76,12 +81,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question">Question <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="question" class="form-control col-md-7 col-xs-12" name="question" placeholder="Question" 
+                          <input id="question" class="form-control col-md-7 col-xs-12" name="question" placeholder="Question"
                           type="text" value="{{ old('question') }}">
                         </div>
                       </div>
                         <div id="options">
-                          
+
                         </div>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="details">
@@ -144,4 +149,4 @@
     });
    });
 </script>
-@endsection            
+@endsection

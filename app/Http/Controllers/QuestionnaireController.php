@@ -23,9 +23,6 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        //
-
-        //
         $questionnaire = Questionnaire::all();
 
         return view('questionnaire.index')->with('questionnaire',$questionnaire );
@@ -63,16 +60,6 @@ class QuestionnaireController extends Controller
 
     public function store(Request $request)
     {
-        //
-
-
-        // $table->increments('id');
-        //     $table->integer('question_id');
-        //     $table->string('option');
-        // foreach ($request->details as $key => $value) {
-        //     # code...
-        //     echo $key."  ".$value;
-        // };
         if ($request->details){
             $rules = array(
                 'type' => 'required',
@@ -109,18 +96,16 @@ class QuestionnaireController extends Controller
                 $qsn->weight = $request->weight_1;
             };
             $qsn->category_id = $request->category_id;
-            $qsn->organization_id = session()->get('user.account.organization_id');
+            $qsn->organization_id = session()->get('user.account.id');
             $qsn->user_id =  Auth::user()->id;
             $qsn->save();
 
             if($qsn->id){
                 if($request->details){
-
-
                     foreach ($request->details as $key => $value) {
                         $qsn_details = new QuestionDetails;
                         $qsn_details->question_id = $qsn->id;
-                        $qsn_details->option = $value;
+                        $qsn_details->options = $value;
                         $qsn_details->save();
                     };
                 }
@@ -169,27 +154,23 @@ class QuestionnaireController extends Controller
     Questionnaire::where('id', $id)
                  ->update(['question' => $request->question], ['weight' => $request->weight]);
 
-    foreach($request->option as $key => $value){
-      QuestionDetails::where('id', $key)
-                    ->where('question_id', $id)
-                    ->update(['option' => $value]);
+    if(count($request->option)>0){
+      foreach($request->option as $key => $value){
+        QuestionDetails::where('id', $key)
+                      ->where('question_id', $id)
+                      ->update(['options' => $value]);
+      }
     }
 
     if($request->details){
           foreach ($request->details as $key => $value) {
               $qsn_details = new QuestionDetails;
               $qsn_details->question_id = $id;
-              $qsn_details->option = $value;
+              $qsn_details->options = $value;
               $qsn_details->save();
           };
     }
     return $this->edit($id);
-    // $question = Questionnaire::where('id', $id)->first();
-    // $options = QuestionDetails::where('question_id', $id)->get();
-    // return view('questionnaire.edit')
-    //             ->with('question', $question)
-    //             ->with('types', $this->types())
-    //             ->with('options', $options);
     }
 
     /**
@@ -198,8 +179,12 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $category_id)
     {
-        //
+        $deleted = Questionnaire::where('id', $id)->delete();
+
+        $deletedQd = QuestionDetails::where('question_id', $id)->delete();
+
+        return redirect('category/'.$category_id);
     }
 }

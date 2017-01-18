@@ -5,11 +5,11 @@
 	@include('organization.initial_page')
  @else
  @php
-  $organization_id = session()->get('user.account.organization_id');
+  $organization_id = session()->get('user.account.id');
  @endphp
   <div class="well">
     <div class="pull-right">
-      <a class="btn btn-success" href="{{ url('organization/'.$organization_id.'/edit')}}">Edit</a>  
+      <a class="btn btn-success" href="{{ url('organization/'.$organization_id.'/edit')}}">Edit</a>
     </div>
   @foreach($organization as $key => $organization )
     <h3>{{ $organization->org_name }}</h3>
@@ -17,14 +17,14 @@
     <h3>{{ $organization->phone_number }}</h3>
     <h3>{{ $organization->industry }}</h3>
     <h3>{{ $organization->email }}</h3>
-    @endforeach 
-    
+    @endforeach
+
   </div>
 		<div class="row">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Forms <small>basic table subtitle</small></h2>
+                    <h2>Forms <small></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -49,6 +49,7 @@
                         <tr>
                           <th>#</th>
                           <th>Title</th>
+                          <th>Form type</th>
                           <th>Description</th>
                         </tr>
                       </thead>
@@ -60,12 +61,23 @@
                           <tr>
                             <th scope="row"><a href="{{ url('category/'.$category->id)}}">{{ $id }}</a></th>
                             <td><a href="{{ url('category/'.$category->id)}}">{{ $category->title }}</a></td>
+                            @php
+                              if($category->category_type == 1 ) {
+                            @endphp
+                              <td><a href="{{ url('category/'.$category->id)}}">Closed</a></td>
+                            @php
+                              } else {
+                            @endphp
+                              <td><a href="{{ url('category/'.$category->id)}}">Open</a></td>
+                            @php
+                              };
+                            @endphp
                             <td><a href="{{ url('category/'.$category->id)}}">{{ $category->description }}</a></td>
                           </tr>
-                          @php 
+                          @php
                             $id +=1;
-                          @endphp   
-                        @endforeach                        
+                          @endphp
+                        @endforeach
                       </tbody>
                     </table>
                     <div><a class="btn btn-success" href="{{ route('category.create') }}">Add Questionnaire</a></div>
@@ -76,7 +88,7 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Surveyors <small>basic table subtitle</small></h2>
+                    <h2>Surveyors <small></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -118,16 +130,16 @@
                             <td>{{ $surveyor->email }}</td>
                             <td>{{ $surveyor->phone_number }}</td>
                           </tr>
-                          @php 
+                          @php
                             $id +=1;
-                          @endphp  
-                        @endforeach  
+                          @endphp
+                        @endforeach
                       </tbody>
                     </table>
                       <div><a class="btn btn-success" href="{{ route('surveyor.create') }}">Add Surveyor</a></div>
                   </div>
                 </div>
               </div>
-            </div>  
-    @endif          
+            </div>
+    @endif
 @endsection

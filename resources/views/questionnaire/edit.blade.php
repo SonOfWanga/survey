@@ -3,6 +3,11 @@
 @section('content')
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
+    <a href="{{ url('category/'.$question['category_id'])}}"><i class="fa fa-arrow-left fa-2x"></i></a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Questions <small>sub title</small></h2>
@@ -63,13 +68,12 @@
            if (count($options)) {
             $i = 0;
           @endphp
-
           @foreach($options as $key => $option)
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="details">
                   Option {{ $i+1 }} <span class="required">*</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="option" class="form-control col-md-7 col-xs-12" name="option[{{$option->id}}]" placeholder="Question" type="text" value="{{$option->option}}"><br />
+                  <input id="option" class="form-control col-md-7 col-xs-12" name="option[{{$option->id}}]" placeholder="Question" type="text" value="{{$option->options}}"><br />
               </div>
             </div>
             @php
@@ -97,7 +101,16 @@
             </div>
           </div>
           @php
-            };
+          } else {
+          @endphp
+          <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button type="reset" class="btn btn-primary">Reset</button>
+              <button id="send" type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </div>
+          @php
+           }
           @endphp
         </form>
       </div>
@@ -135,12 +148,6 @@
 
         );
       i +=1;
-    });
-
-    $("#remove_field").click(function(){
-      alert("haiya");
-      //$('div.second div:eq(0)').attr('id')
-      //$("#options").detach('<input id="details[]">');
     });
    });
 </script>

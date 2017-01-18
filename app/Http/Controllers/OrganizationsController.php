@@ -25,37 +25,38 @@ class OrganizationsController extends Controller
      */
     public function index(Request $request)
     {
-         $account = AccountSettings::where('user_id', Auth::user()->id)->get();
-        
+        $account = AccountSettings::where('user_id', Auth::user()->id)->get();
+
         if($account->count() > 0){
-                foreach ($account as $key => $value) {
-                    $setAccountSession = $value;
-                };
+              $org = Organizations::where('user_id', Auth::user()->id)
+                                  ->where('id', $account[0]->organization_id)->get();
+            $setAccountSession = [];
+            foreach ($account as $key => $value) {
+                $setAccountSession = $value;
+            };
 
-                $organization = Organizations::where('user_id', Auth::user()->id)->
-                                where('id', $account[0]['organization_id'])->get();
-                $surveyors = Surveyor::where('organization_id',$account[0]['organization_id'])->get();
+            foreach ($org as $key => $value) {
+                $setAccountSession = $value;
+            };
 
-                $categories = Category::where('organization_id',$account[0]['organization_id'])->get();
-                
-                if(count($organization)>0){
-                    $this->sessionFunction($request, $setAccountSession);
-                    return view('organization.index')->with('organization', $organization)->with('surveyors', $surveyors)->with('categories', $categories);
-                }else{
-                    $organization = null;
-                    return view('organization.index')->with('organization', $organization);
-                }
+            $organization = Organizations::where('id', $account[0]['organization_id'])->get();
+            $surveyors = Surveyor::where('organization_id',$account[0]['organization_id'])->get();
+
+            $categories = Category::where('organization_id',$account[0]['organization_id'])->get();
+
+            if(count($organization)>0){
+                $this->sessionFunction($request, $setAccountSession);
+                return view('organization.index')->with('organization', $organization)->with('surveyors', $surveyors)->with('categories', $categories);
+            }else{
+                $organization = null;
+                return view('organization.index')->with('organization', $organization);
+            }
         }
         else {
 
             $organization = null;
-            return view('organization.index')->with('organization', $organization); 
+            return view('organization.index')->with('organization', $organization);
         }
-        // load the view and pass the nerds
-        
-        //return view('organization.index');
-        //print_r(session()->get('user.account.id'));
-        //print_r(count($account));
     }
 
     /**
@@ -107,7 +108,7 @@ class OrganizationsController extends Controller
             $org->address = $request->address;
             $org->number_of_employees = $request->number_of_employees;
             $org->user_id =  Auth::user()->id;
-            
+
             if($org->save()){
                 $acc = new AccountSettings;
                 $acc->organization_id = $org->id;
@@ -120,12 +121,7 @@ class OrganizationsController extends Controller
 
                 return redirect('organization');
             }
-            else  {
-                //return redirect('organization/create');
-            }
-            // redirect
-            //Session::flash('message', 'Successfully created nerd!');
-            
+
         }
     }
 
@@ -175,7 +171,7 @@ class OrganizationsController extends Controller
         $org->number_of_employees = $request->number_of_employees;
         $org->user_id =  Auth::user()->id;
         $org->save();
-        
+
         return redirect('/organization');
     }
 

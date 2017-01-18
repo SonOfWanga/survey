@@ -78,7 +78,7 @@ class SurveyorController extends Controller
             $surveyor->email = $request->email;
             $surveyor->api_token = str_random(60);
             $surveyor->occupation = $request->occupation;
-            $surveyor->organization_id = session()->get('user.account.organization_id');
+            $surveyor->organization_id = session()->get('user.account.id');
             $surveyor->user_id = Auth::user()->id;
             $surveyor->save();
 

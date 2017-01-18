@@ -3,6 +3,11 @@
 @section('content')
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
+    <a href="{{ url('category/'.$category[0]->id) }}"><i class="fa fa-arrow-left fa-2x"></i></a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Cateory <small>sub title</small></h2>
@@ -25,12 +30,33 @@
       </div>
       <div class="x_content">
         <form class="form-horizontal form-label-left" novalidate method="POST" action="/category/update/{{$category[0]->id}}">
-          <input name="_token" hidden value="{!! csrf_token() !!}" /> 
+          <input name="_token" hidden value="{!! csrf_token() !!}" />
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Category Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="title" placeholder="Title" required="required" type="text" value="{{ $category[0]->title }}">
+            </div>
+          </div>
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_type">Category type <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select id="category_type" class="form-control col-md-7 col-xs-12" name="category_type" type="text">
+                @php
+                  if($category[0]->category_type == 1 ) {
+                @endphp
+                  <option value="1" selected>Closed</option>
+                  <option value="0">Open</option>
+                @php
+                  } else {
+                @endphp
+                  <option value="1">Closed</option>
+                  <option value="0" selected>Open</option>
+                @php
+                  };
+                @endphp
+              </select>
             </div>
           </div>
           <div class="item form-group">
@@ -53,4 +79,4 @@
     </div>
   </div>
 </div>
-@endsection            
+@endsection

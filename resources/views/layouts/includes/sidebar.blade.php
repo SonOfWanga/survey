@@ -17,19 +17,19 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Dashboard </a>
+                  <li><a href="{{ url('dashboard') }}"><i class="fa fa-home"></i> Dashboard </a>
                   <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> Organisation </a>
                   <li><a><i class="fa fa-home"></i> Profile </a></li>
                   <li><a><i class="fa fa-edit"></i> Account Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Subscription</a></li>
-                      <li><a href="form_advanced.html">Users</a></li>
+                      <li><a href="{{ route('accountusers.index')}}">Users</a></li>
                       <li><a href="form_validation.html">Email</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-              
+
 
             </div>
             <!-- /sidebar menu -->

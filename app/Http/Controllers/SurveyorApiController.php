@@ -8,6 +8,7 @@ use App\CategorySurveyors;
 use App\Questionnaire;
 use App\QuestionDetails;
 use Validator;
+use Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -18,12 +19,14 @@ class SurveyorApiController extends Controller
     
     public function login()
     {
-        $var = Surveyor::where('email', 'peter@g.com')->first();
-        return json_encode($var, JSON_FORCE_OBJECT);
+        //$var = Surveyor::where('email', 'p@g.com')->first();
+        //$var = ['what'=> 'what is wrong with you', 'why'=> 'why is it a problem'];
+        $var = Surveyor::all();
+        return Response::json($var);
     }
 
     public function form(){
-        $surveyor = Surveyor::where('email', 'j@james.com')->get();
+        $surveyor = Surveyor::where('email', 'p@g.com')->get();
         $categorysurveyor = CategorySurveyors::where('surveyor_id', $surveyor[0]->id)->get();
         $category = Category::where('id', $categorysurveyor[0]->category_id)->get();
 
@@ -36,7 +39,7 @@ class SurveyorApiController extends Controller
             $question_obj[] = array('question'=>$question, 'options'=>$option_obj);                              
         };
         
-        return json_encode($question_obj, JSON_FORCE_OBJECT);
+        return Response::json($question_obj);
 
     }
 
