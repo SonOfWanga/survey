@@ -50,6 +50,7 @@
                           <th>#</th>
                           <th>Title</th>
                           <th>Form type</th>
+                          <th>Code </th>
                           <th>Description</th>
                         </tr>
                       </thead>
@@ -72,7 +73,8 @@
                             @php
                               };
                             @endphp
-                            <td><a href="{{ url('category/'.$category->id)}}">{{ $category->description }}</a></td>
+                             <td><a href="{{ url('category/'.$category->id)}}">{{ $category->category_code }}</a></td>
+                             <td><a href="{{ url('category/'.$category->id)}}">{{ $category->description }}</a></td>
                           </tr>
                           @php
                             $id +=1;
