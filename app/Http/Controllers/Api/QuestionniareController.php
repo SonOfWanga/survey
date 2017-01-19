@@ -24,6 +24,15 @@ class QuestionniareController extends Controller {
   // public function index(Request $request){
   //   return "index what what";
   // }
+  public function types(){
+        $types  = array('1' => 'Free text',
+                        '2' => 'Yes\No',
+                        '3' => 'Check box',
+                        '4' => 'Option',
+                        '5' => 'List',
+                        '6' => 'Number');
+        return $types;
+    }
 
   public function getForm(Request $request){
 
@@ -39,13 +48,18 @@ class QuestionniareController extends Controller {
           $question_obj = [];
           foreach($questions as $question){
               //$question_obj[] = $question;
-              $option_obj = QuestionDetails::where('question_id', $question->id)->get(['question_id', 'options']);
-              $question_obj[] = array('question'=>$question, 'details'=>$option_obj);
+            if($question->question_type == 3 || $question->question_type == 4 || $question->question_type == 5){
+                $option_obj = QuestionDetails::where('question_id', $question->id)->get(['id','question_id', 'options']);
+                $question_obj[] = array('question'=>$question, 'details'=>$option_obj);
+            }
+            else {
+                 $question_obj[] = array('question'=>$question);
+            }
+              
           };
 
-          return Response::json($question_obj);
+          return Response::json(array("questions"=>$question_obj));
 
-          //return $question_obj;
       }
       elseif($cat[0]->category_type == 1){
           return  Response::json( array('error'=>"Form closed")) ;
